@@ -1,0 +1,128 @@
+# Mockup Studio — makieta wizarda. Schemat: mockup.schema.json
+# Siatka 12 kolumn: każdy element ma `span` 1–12; `rows` to lista wierszy, wiersz to lista elementów.
+version: 1
+name: wniosek-kredytowy
+description: Wizard wniosku kredytowego dla klienta firmowego
+aiContext: |-
+  Angular 17, standalone components, Reactive Forms, PrimeNG 17 (motyw Lara, https://v17.primeng.org), PrimeFlex do siatki.
+  Jedna kolumna na mobile, siatka 12 kolumn od 768px.
+theme:
+  preset: modern
+  colors: { primary: "#2F5BEA", accent: "#7C5CFC", background: "#F4F6FB", surface: "#FFFFFF", text: "#0F172A", muted: "#64748B", border: "#E2E8F0", success: "#16A34A", warning: "#D97706", error: "#DC2626", info: "#0284C7" }
+  radius: 10
+  density: comfortable
+  font: Inter
+  shadow: soft
+data:
+  - entity: company
+    label: Firma
+    fields:
+      - id: nip
+        label: NIP
+        type: nip
+        required: true
+      - id: name
+        label: Nazwa firmy
+        type: readonly
+        source: GUS po NIP
+      - id: legalForm
+        label: Forma prawna
+        type: enum-small
+        options: [ Sp. z o.o., S.A., JDG ]
+      - id: address
+        label: Adres siedziby
+        type: address
+        source: GUS po NIP
+  - entity: loan
+    label: Kredyt
+    fields:
+      - id: amount
+        label: Kwota kredytu
+        type: amount
+        required: true
+      - id: period
+        label: Okres (miesiące)
+        type: number
+        required: true
+      - id: purpose
+        label: Cel kredytu
+        type: dict
+        dictionary: CEL_KREDYTU
+      - id: hasCollateral
+        label: Czy jest zabezpieczenie?
+        type: yes-no
+        required: true
+steps:
+  - id: s1
+    title: Dane firmy
+    purpose: Klient podaje NIP, system pobiera dane z GUS.
+    sections:
+      - id: sec-firma
+        title: Firma
+        description: Podaj NIP, resztę uzupełnimy automatycznie.
+        rows:
+          - - id: el-nip
+              kind: field
+              bind: company.nip
+              span: 4
+              hint: 10 cyfr, bez kresek
+              on:
+                - event: blur
+                  do: call
+                  target: "GUS: pobierz dane firmy"
+                  then: wypełnij company.name i company.address
+              aiHint: Walidacja sumy kontrolnej na blur
+            - id: el-name
+              kind: field
+              bind: company.name
+              span: 8
+          - - id: el-form
+              kind: field
+              bind: company.legalForm
+              span: 12
+          - - id: el-info
+              kind: info
+              text: Dane pobieramy automatycznie z rejestru GUS.
+              variant: info
+              span: 12
+    transitions:
+      - label: Zapisz szkic
+        variant: ghost
+        do: zapisz draft
+      - label: Dalej
+        when: formularz poprawny
+        variant: primary
+        to: s2
+    aiHint: Dane z GUS pokaż jako readonly z możliwością korekty adresu.
+  - id: s2
+    title: Parametry kredytu
+    purpose: Klient określa kwotę, okres i cel kredytu.
+    sections:
+      - id: sec-kredyt
+        title: Kredyt
+        rows:
+          - - id: el-amount
+              kind: field
+              bind: loan.amount
+              span: 6
+            - id: el-period
+              kind: field
+              bind: loan.period
+              control: slider
+              span: 6
+          - - id: el-purpose
+              kind: field
+              bind: loan.purpose
+              span: 12
+          - - id: el-coll
+              kind: field
+              bind: loan.hasCollateral
+              span: 12
+    transitions:
+      - label: Wstecz
+        variant: outline
+        to: s1
+      - label: Wyślij wniosek
+        when: formularz poprawny
+        variant: primary
+        do: submit → ekran potwierdzenia

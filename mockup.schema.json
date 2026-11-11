@@ -1,0 +1,877 @@
+{
+  "$ref": "#/definitions/Mockup",
+  "definitions": {
+    "Mockup": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "number",
+          "const": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "aiContext": {
+          "type": "string"
+        },
+        "theme": {
+          "type": "object",
+          "properties": {
+            "preset": {
+              "type": "string"
+            },
+            "colors": {
+              "type": "object",
+              "properties": {
+                "primary": {
+                  "type": "string",
+                  "pattern": "^#[0-9a-fA-F]{6}$"
+                },
+                "accent": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "background": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "surface": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "text": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "muted": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "border": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "success": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "warning": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "error": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                },
+                "info": {
+                  "$ref": "#/definitions/Mockup/properties/theme/properties/colors/properties/primary"
+                }
+              },
+              "required": [
+                "primary",
+                "accent",
+                "background",
+                "surface",
+                "text",
+                "muted",
+                "border",
+                "success",
+                "warning",
+                "error",
+                "info"
+              ],
+              "additionalProperties": false
+            },
+            "radius": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 24
+            },
+            "density": {
+              "type": "string",
+              "enum": [
+                "compact",
+                "comfortable"
+              ]
+            },
+            "font": {
+              "type": "string"
+            },
+            "shadow": {
+              "type": "string",
+              "enum": [
+                "none",
+                "soft",
+                "strong"
+              ]
+            },
+            "controlRefs": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "enum": [
+                  "inputText",
+                  "inputTextarea",
+                  "inputNumber",
+                  "inputMask",
+                  "inputOtp",
+                  "password",
+                  "chips",
+                  "editor",
+                  "dropdown",
+                  "autoComplete",
+                  "multiSelect",
+                  "listbox",
+                  "selectButton",
+                  "radioButton",
+                  "checkbox",
+                  "triStateCheckbox",
+                  "treeSelect",
+                  "cascadeSelect",
+                  "inputSwitch",
+                  "toggleButton",
+                  "calendar",
+                  "slider",
+                  "knob",
+                  "rating",
+                  "colorPicker",
+                  "fileUpload",
+                  "address",
+                  "readonly"
+                ]
+              }
+            },
+            "customCss": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "colors",
+            "radius",
+            "density",
+            "font",
+            "shadow"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "label": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "text",
+                        "text-long",
+                        "number",
+                        "amount",
+                        "date",
+                        "date-range",
+                        "yes-no",
+                        "flag",
+                        "consent",
+                        "enum-small",
+                        "enum",
+                        "dict",
+                        "multi-small",
+                        "multi",
+                        "nip",
+                        "pesel",
+                        "regon",
+                        "iban",
+                        "postcode",
+                        "email",
+                        "phone",
+                        "address",
+                        "file",
+                        "readonly"
+                      ]
+                    },
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "source": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "options": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "dictionary": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "label",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "entity",
+              "fields"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "title": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "optional": {
+                "type": "boolean"
+              },
+              "when": {
+                "type": "string"
+              },
+              "skipTo": {
+                "type": "string"
+              },
+              "aiHint": {
+                "type": "string"
+              },
+              "sections": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "emphasis": {
+                      "type": "string",
+                      "enum": [
+                        "card",
+                        "highlight",
+                        "plain"
+                      ]
+                    },
+                    "aiHint": {
+                      "type": "string"
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "background": {
+                          "type": "string"
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "borderColor": {
+                          "type": "string"
+                        },
+                        "borderWidth": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 8
+                        },
+                        "radius": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 40
+                        },
+                        "padding": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 64
+                        },
+                        "fontSize": {
+                          "type": "integer",
+                          "minimum": 8,
+                          "maximum": 48
+                        },
+                        "fontWeight": {
+                          "type": "string",
+                          "enum": [
+                            "normal",
+                            "medium",
+                            "bold"
+                          ]
+                        },
+                        "shadow": {
+                          "type": "string",
+                          "enum": [
+                            "none",
+                            "soft",
+                            "strong"
+                          ]
+                        },
+                        "css": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "span": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 12
+                                },
+                                "aiHint": {
+                                  "type": "string"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/style"
+                                },
+                                "color": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string",
+                                      "enum": [
+                                        "primary",
+                                        "accent",
+                                        "success",
+                                        "warning",
+                                        "error",
+                                        "info",
+                                        "text",
+                                        "muted"
+                                      ]
+                                    },
+                                    {
+                                      "type": "string",
+                                      "pattern": "^#[0-9a-fA-F]{6}$"
+                                    }
+                                  ]
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "field"
+                                },
+                                "bind": {
+                                  "type": "string"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "control": {
+                                  "type": "string",
+                                  "enum": [
+                                    "inputText",
+                                    "inputTextarea",
+                                    "inputNumber",
+                                    "inputMask",
+                                    "inputOtp",
+                                    "password",
+                                    "chips",
+                                    "editor",
+                                    "dropdown",
+                                    "autoComplete",
+                                    "multiSelect",
+                                    "listbox",
+                                    "selectButton",
+                                    "radioButton",
+                                    "checkbox",
+                                    "triStateCheckbox",
+                                    "treeSelect",
+                                    "cascadeSelect",
+                                    "inputSwitch",
+                                    "toggleButton",
+                                    "calendar",
+                                    "slider",
+                                    "knob",
+                                    "rating",
+                                    "colorPicker",
+                                    "fileUpload",
+                                    "address",
+                                    "readonly"
+                                  ]
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "dictionary": {
+                                  "type": "string"
+                                },
+                                "placeholder": {
+                                  "type": "string"
+                                },
+                                "hint": {
+                                  "type": "string"
+                                },
+                                "required": {
+                                  "type": "boolean"
+                                },
+                                "on": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "event": {
+                                        "type": "string",
+                                        "enum": [
+                                          "change",
+                                          "blur",
+                                          "click",
+                                          "load",
+                                          "submit"
+                                        ]
+                                      },
+                                      "do": {
+                                        "type": "string",
+                                        "enum": [
+                                          "call",
+                                          "navigate",
+                                          "show",
+                                          "hide",
+                                          "set",
+                                          "validate",
+                                          "custom"
+                                        ]
+                                      },
+                                      "target": {
+                                        "type": "string"
+                                      },
+                                      "when": {
+                                        "type": "string"
+                                      },
+                                      "then": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "event",
+                                      "do"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/id"
+                                },
+                                "span": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/span"
+                                },
+                                "aiHint": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/aiHint"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/style"
+                                },
+                                "color": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/color"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "text"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "level": {
+                                  "type": "string",
+                                  "enum": [
+                                    "h1",
+                                    "h2",
+                                    "h3",
+                                    "body",
+                                    "muted"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind",
+                                "text"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/id"
+                                },
+                                "span": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/span"
+                                },
+                                "aiHint": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/aiHint"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/style"
+                                },
+                                "color": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/color"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "info"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "variant": {
+                                  "type": "string",
+                                  "enum": [
+                                    "info",
+                                    "success",
+                                    "warning",
+                                    "error"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind",
+                                "text"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/id"
+                                },
+                                "span": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/span"
+                                },
+                                "aiHint": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/aiHint"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/style"
+                                },
+                                "color": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/color"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "button"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "variant": {
+                                  "type": "string",
+                                  "enum": [
+                                    "primary",
+                                    "secondary",
+                                    "outline",
+                                    "danger",
+                                    "ghost"
+                                  ]
+                                },
+                                "icon": {
+                                  "type": "string"
+                                },
+                                "on": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/on/items"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind",
+                                "label"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/id"
+                                },
+                                "span": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/span"
+                                },
+                                "aiHint": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/aiHint"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/style"
+                                },
+                                "color": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/color"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "table"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "entity": {
+                                  "type": "string"
+                                },
+                                "columns": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "rowActions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/id"
+                                },
+                                "span": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/span"
+                                },
+                                "aiHint": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/aiHint"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/style"
+                                },
+                                "color": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0/properties/color"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "placeholder"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "height": {
+                                  "type": "string",
+                                  "enum": [
+                                    "sm",
+                                    "md",
+                                    "lg"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "span",
+                                "kind",
+                                "text"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "minLength": 1
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "const": "column"
+                                },
+                                "span": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 12
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "aiHint": {
+                                  "type": "string"
+                                },
+                                "style": {
+                                  "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/style"
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "anyOf": [
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/0"
+                                      },
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/1"
+                                      },
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/2"
+                                      },
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/3"
+                                      },
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/4"
+                                      },
+                                      {
+                                        "$ref": "#/definitions/Mockup/properties/steps/items/properties/sections/items/properties/rows/items/items/anyOf/5"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "kind",
+                                "span",
+                                "items"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "rows"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "transitions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "to": {
+                      "type": "string"
+                    },
+                    "do": {
+                      "type": "string"
+                    },
+                    "when": {
+                      "type": "string"
+                    },
+                    "variant": {
+                      "type": "string",
+                      "enum": [
+                        "primary",
+                        "secondary",
+                        "outline",
+                        "danger",
+                        "ghost"
+                      ]
+                    },
+                    "align": {
+                      "type": "string",
+                      "enum": [
+                        "left",
+                        "right"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "label"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "sections"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "version",
+        "name",
+        "theme",
+        "data",
+        "steps"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

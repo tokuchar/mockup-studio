@@ -1,0 +1,683 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  font-family: Inter, system-ui, sans-serif;
+  color: #0f172a;
+  background: #eef1f6;
+}
+
+/* ===== Edytor (chrome) ===== */
+.ed-input {
+  @apply w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100;
+}
+.ed-label {
+  @apply mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500;
+}
+.ed-btn {
+  @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-100 disabled:opacity-40;
+}
+.ed-btn-primary {
+  @apply inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700;
+}
+.ed-icon-btn {
+  @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-800;
+}
+
+/* ===== Canvas — kontrolki w nowoczesnym stylu, sterowane motywem ===== */
+.ms-canvas {
+  font-family: var(--font);
+  color: var(--c-text);
+  background: var(--c-bg);
+}
+.ms-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+}
+.ms-card.highlight {
+  border-color: color-mix(in srgb, var(--c-primary) 35%, var(--c-border));
+  background: color-mix(in srgb, var(--c-primary) 4%, var(--c-surface));
+}
+.ms-card.plain {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.ms-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--c-text);
+}
+.ms-optional {
+  font-weight: 400;
+  color: var(--c-muted);
+  margin-left: 4px;
+}
+.ms-hint {
+  font-size: 12px;
+  color: var(--c-muted);
+  margin-top: 6px;
+}
+.ms-input {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  color: var(--c-text);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--pad) 12px;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+.ms-input::placeholder {
+  color: color-mix(in srgb, var(--c-muted) 75%, transparent);
+}
+.ms-input:hover {
+  border-color: color-mix(in srgb, var(--c-text) 22%, var(--c-border));
+}
+.ms-input:focus,
+.ms-input:focus-within {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-primary) 18%, transparent);
+}
+.ms-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-input-wrap input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+}
+.ms-adorn {
+  color: var(--c-muted);
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+.ms-readonly {
+  font-size: 14px;
+  padding: var(--pad) 0;
+  border-bottom: 1px dashed var(--c-border);
+  color: var(--c-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-badge {
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 10%, transparent);
+}
+
+/* przyciski */
+.ms-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--pad) 18px;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s,
+    transform 0.05s;
+  white-space: nowrap;
+}
+.ms-btn,
+.ms-btn:focus {
+  outline: none;
+}
+.ms-btn:active {
+  transform: translateY(1px);
+}
+.ms-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--btn) 25%, transparent);
+}
+.ms-btn.primary {
+  background: var(--btn);
+  color: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 4px 12px color-mix(in srgb, var(--btn) 30%, transparent);
+}
+.ms-btn.primary:hover {
+  background: color-mix(in srgb, var(--btn) 88%, #000);
+}
+.ms-btn.secondary {
+  background: color-mix(in srgb, var(--btn) 11%, var(--c-surface));
+  color: var(--btn);
+}
+.ms-btn.secondary:hover {
+  background: color-mix(in srgb, var(--btn) 18%, var(--c-surface));
+}
+.ms-btn.outline {
+  background: var(--c-surface);
+  border-color: var(--c-border);
+  color: var(--c-text);
+}
+.ms-btn.outline:hover {
+  border-color: var(--btn);
+  color: var(--btn);
+}
+.ms-btn.ghost {
+  background: transparent;
+  color: var(--c-muted);
+}
+.ms-btn.ghost:hover {
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+  color: var(--c-text);
+}
+.ms-btn.danger {
+  background: var(--c-error);
+  color: #fff;
+}
+
+/* radio / checkbox */
+.ms-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.ms-radio,
+.ms-check {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 1.5px solid color-mix(in srgb, var(--c-text) 25%, var(--c-border));
+  background: var(--c-surface);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: all 0.15s;
+  margin: 0;
+}
+.ms-radio {
+  border-radius: 999px;
+}
+.ms-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+.ms-radio:checked {
+  border-color: var(--c-primary);
+  border-width: 5px;
+}
+.ms-check:checked {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.ms-check:checked::after {
+  content: '';
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.ms-radio:focus-visible,
+.ms-check:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-primary) 20%, transparent);
+}
+
+.ms-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.ms-tile {
+  position: relative;
+  border: 1.5px solid var(--c-border);
+  border-radius: calc(var(--radius) + 2px);
+  padding: 14px;
+  background: var(--c-surface);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s;
+}
+.ms-tile:hover {
+  border-color: color-mix(in srgb, var(--c-primary) 50%, var(--c-border));
+}
+.ms-tile.on {
+  border-color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 7%, var(--c-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary) 14%, transparent);
+}
+
+.ms-segment {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: calc(var(--radius) + 4px);
+  background: color-mix(in srgb, var(--c-text) 6%, var(--c-surface));
+}
+.ms-segment button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 22px;
+  border-radius: var(--radius);
+  border: 0;
+  background: transparent;
+  color: var(--c-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ms-segment button.on {
+  background: var(--c-surface);
+  color: var(--c-primary);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+.ms-toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text) 18%, var(--c-border));
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex: none;
+}
+.ms-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  transition: transform 0.2s;
+}
+.ms-toggle.on {
+  background: var(--c-primary);
+}
+.ms-toggle.on::after {
+  transform: translateX(18px);
+}
+
+.ms-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 3px 6px 3px 10px;
+  border-radius: 999px;
+  color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 11%, var(--c-surface));
+}
+
+.ms-alert {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent);
+  background: color-mix(in srgb, var(--tone) 8%, var(--c-surface));
+  color: color-mix(in srgb, var(--tone) 60%, var(--c-text));
+}
+.ms-alert svg {
+  color: var(--tone);
+  flex: none;
+  margin-top: 1px;
+}
+
+.ms-drop {
+  border: 1.5px dashed color-mix(in srgb, var(--c-primary) 35%, var(--c-border));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--c-primary) 3%, var(--c-surface));
+  padding: 18px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--c-muted);
+}
+
+.ms-slider {
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--c-primary) 40%, color-mix(in srgb, var(--c-text) 12%, var(--c-border)) 40%);
+  outline: none;
+}
+.ms-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--c-primary);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+  cursor: pointer;
+}
+
+.ms-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.ms-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--c-muted);
+  background: color-mix(in srgb, var(--c-text) 3%, var(--c-surface));
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--c-border);
+}
+.ms-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--c-border);
+}
+.ms-table tr:last-child td {
+  border-bottom: 0;
+}
+.ms-skel {
+  display: inline-block;
+  height: 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text) 10%, var(--c-surface));
+}
+
+.ms-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ms-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-muted);
+  cursor: pointer;
+  padding: 4px 8px 4px 4px;
+  border-radius: 999px;
+}
+.ms-step .num {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+}
+.ms-step.done .num {
+  background: color-mix(in srgb, var(--c-primary) 14%, var(--c-surface));
+  border-color: transparent;
+  color: var(--c-primary);
+}
+.ms-step.on {
+  color: var(--c-text);
+}
+.ms-step.on .num {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-primary) 18%, transparent);
+}
+.ms-step-line {
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-border);
+}
+
+/* elementy w trybie edycji */
+.el-edit {
+  position: relative;
+  border-radius: calc(var(--radius) + 4px);
+  outline: 1.5px solid transparent;
+  outline-offset: 5px;
+  transition: outline-color 0.1s;
+}
+.el-edit:hover {
+  outline-color: rgb(99 102 241 / 0.35);
+}
+.el-edit.selected {
+  outline: 2px solid rgb(79 70 229);
+}
+.el-edit .el-inner {
+  pointer-events: none;
+}
+.el-edit.dragging {
+  opacity: 0.35;
+}
+
+/* PrimeNG-like: SelectButton, ToggleButton, InputNumber spinner, TriStateCheckbox */
+.ms-selectbtn {
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--c-surface);
+}
+.ms-selectbtn button {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--pad) 20px;
+  border: 0;
+  border-left: 1px solid var(--c-border);
+  background: transparent;
+  color: var(--c-text);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ms-selectbtn button:first-child {
+  border-left: 0;
+}
+.ms-selectbtn button:hover {
+  background: color-mix(in srgb, var(--c-text) 4%, var(--c-surface));
+}
+.ms-selectbtn button.on {
+  background: var(--c-primary);
+  color: #fff;
+}
+.ms-togglebtn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--pad) 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  cursor: pointer;
+}
+.ms-togglebtn.on {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}
+.ms-spin {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 15px;
+  border: 0;
+  background: transparent;
+  color: var(--c-muted);
+  cursor: pointer;
+  border-radius: 4px;
+}
+.ms-spin:hover {
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+}
+.ms-tri {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid color-mix(in srgb, var(--c-text) 25%, var(--c-border));
+  background: var(--c-surface);
+}
+.ms-tri.yes {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.ms-tri.yes::after {
+  content: '';
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.ms-tri.no {
+  background: var(--c-error);
+  border-color: var(--c-error);
+}
+
+/* PrimeNG (Lara) overlay: Dropdown / AutoComplete / MultiSelect / TreeSelect */
+.ms-trigger {
+  cursor: pointer;
+  user-select: none;
+}
+.ms-input.focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-primary) 18%, transparent);
+}
+.ms-overlay {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  background: var(--c-surface);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  animation: ms-pop 0.12s ease-out;
+}
+@keyframes ms-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+.ms-overlay-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: 240px;
+  overflow: auto;
+}
+.ms-overlay-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.ms-overlay-item:hover {
+  background: color-mix(in srgb, var(--c-text) 5%, var(--c-surface));
+}
+.ms-overlay-item.selected {
+  background: color-mix(in srgb, var(--c-primary) 10%, var(--c-surface));
+  color: color-mix(in srgb, var(--c-primary) 85%, var(--c-text));
+}
+.ms-overlay-empty {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--c-muted);
+}
+.ms-overlay-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--c-border);
+  background: color-mix(in srgb, var(--c-text) 2%, var(--c-surface));
+}
+.ms-check-box {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid color-mix(in srgb, var(--c-text) 25%, var(--c-border));
+  background: var(--c-surface);
+  color: #fff;
+  cursor: pointer;
+}
+.ms-check-box.on {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+/* kolumna (kontener) w trybie edycji */
+.el-edit.el-container {
+  outline-offset: 3px;
+}
+.ms-column {
+  min-height: 72px;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1.5px dashed rgb(165 180 252 / 0.7);
+  background: rgb(238 242 255 / 0.25);
+  padding: 10px;
+}
